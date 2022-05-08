@@ -1,0 +1,19 @@
+{
+    "name": "todo_app",
+    "version": "1.0.0",
+    "description": "Base Todo App",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/MaximGolub/todo_app.git"
+    },
+    "author": "Max Golub",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/MaximGolub/todo_app/issues"
+    },
+    "homepage": "https://github.com/MaximGolub/todo_app#readme"
+}
