@@ -1,11 +1,13 @@
-import './styles/main.scss'
+import './styles/main.scss';
+import App from './scripts/templates/App';
 
-const x = 0
+const registerScreen = document.getElementById('register-screen');
+const loginScreen = document.getElementById('login-screen');
+const registerLinkEl = document.getElementById('register-link');
 
-async function test() {
-  await 1
-}
+registerLinkEl.addEventListener('click', () => {
+  loginScreen.style.display = 'none';
+  registerScreen.style.display = 'flex';
+});
 
-test()
-
-console.log('3')
+const app = new App();
