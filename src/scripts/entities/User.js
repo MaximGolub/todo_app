@@ -1,9 +1,10 @@
 class User {
-  constructor({ name, email, password, age }) {
+  constructor({ id, name, email, age, token }) {
+    this.id = id;
     this.name = name;
     this.email = email;
-    this.password = password;
     this.age = age;
+    this.token = token;
   }
 }
 

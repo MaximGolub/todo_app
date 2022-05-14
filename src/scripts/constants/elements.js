@@ -1,0 +1,10 @@
+export const AUTH_SECTION_ID = 'auth';
+export const REGISTER_FORM_ID = 'register-form';
+export const SIGN_IN_FORM_ID = 'sign-in-form';
+export const SIGN_IN_SCREEN_ID = 'signin-screen';
+export const REGISTER_SCREEN_ID = 'register-screen';
+export const REGISTER_LINK_ID = 'register-link';
+export const APP_ID = 'app';
+export const USER_SECTION_ID = 'user-section';
+export const TODOS_SECTION_ID = 'todos-section';
+export const LOGOUT_BUTTON_ID = 'logout';
