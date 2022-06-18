@@ -1,19 +1,13 @@
 import { BASE_URL } from '../constants';
-import { store } from '../services/Store';
+import { store } from './Store';
 
-const fetcher = async ({
-  url,
-  body = {},
-  headers = {
-    'Content-Type': 'application/json',
-  },
-  method = 'GET',
-}) => {
+const fetcher = async ({ url, body = {}, headers = {}, method = 'GET' }) => {
   const { user } = store.getState();
   const defaultHeaders = {
     'Content-Type': 'application/json',
     ...headers,
   };
+
   if (user) {
     defaultHeaders['Authorization'] = `Bearer ${user.token}`;
   }

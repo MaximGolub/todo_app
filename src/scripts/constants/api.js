@@ -1,1 +1,1 @@
-export const BASE_URL = 'https://api-nodejs-todolist.herokuapp.com';
+export const BASE_URL = 'https://gentle-anchorage-72573.herokuapp.com/api';

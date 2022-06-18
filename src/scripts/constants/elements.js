@@ -7,4 +7,7 @@ export const REGISTER_LINK_ID = 'register-link';
 export const APP_ID = 'app';
 export const USER_SECTION_ID = 'user-section';
 export const TODOS_SECTION_ID = 'todos-section';
+export const TODOS_FORM_ID = 'todos-form';
+export const TODOS_TABLE_ID = 'todos-table';
 export const LOGOUT_BUTTON_ID = 'logout';
+export const ADD_BUTTON_ID = 'btn_add_task';

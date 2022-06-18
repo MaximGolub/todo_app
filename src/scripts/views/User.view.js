@@ -12,12 +12,8 @@ class UserView {
 
   init() {
     const { user } = store.getState();
-    this.root.innerHTML = generateUserTemplate({
-      name: user.name,
-      age: user.age,
-    });
+    this.root.innerHTML = generateUserTemplate({ email: user.email });
     this.logoutBtn = document.getElementById(LOGOUT_BUTTON_ID);
-    this.logoutBtn.addEventListener('click', this.handlerLogout.bind(this));
   }
 
   handlerLogout(e) {

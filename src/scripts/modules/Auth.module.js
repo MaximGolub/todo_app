@@ -1,8 +1,7 @@
 import { Http } from '../services';
 import { AuthView } from '../views';
-import { store } from '../services/Store';
+import { store } from '../services';
 import { User } from '../entities';
-import { USER_SECTION_ID } from '../constants';
 
 class AuthModule {
   constructor() {
@@ -15,18 +14,16 @@ class AuthModule {
   async signIn(e) {
     e.preventDefault();
     const reqBody = AuthView.getRequestBodyFromForm(this.authView.signInFormEl);
-    const { user, token } = await Http.post({
-      url: '/user/login',
+    const { user, accessToken } = await Http.post({
+      url: '/signin',
       body: reqBody,
     });
     store.setState(
       'user',
       new User({
         id: user.id,
-        name: user.name,
         email: user.email,
-        age: user.age,
-        token,
+        token: accessToken,
       })
     );
   }
@@ -36,18 +33,16 @@ class AuthModule {
     const reqBody = AuthView.getRequestBodyFromForm(
       this.authView.registerFormEl
     );
-    const { user, token } = await Http.post({
-      url: '/user/register',
+    const { user, accessToken } = await Http.post({
+      url: '/signup',
       body: reqBody,
     });
     store.setState(
       'user',
       new User({
-        id: user.id,
-        name: user.name,
+        id: user._id,
         email: user.email,
-        age: user.age,
-        token,
+        token: accessToken,
       })
     );
   }
