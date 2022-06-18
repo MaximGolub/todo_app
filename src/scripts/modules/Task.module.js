@@ -7,7 +7,7 @@ class TaskModule {
   constructor() {
     this.taskView = new TaskView({
       addTask: this.addTask.bind(this),
-      getTask: this.getTask.bind(this),
+      deleteTask: this.deleteTask.bind(this),
     });
   }
 
@@ -29,18 +29,10 @@ class TaskModule {
     );
   }
 
-  async getTask() {
-    const task = await Http.get({
-      url: `/todo`,
-    });
-    console.log(task);
-  }
-
   async deleteTask() {
     await Http.delete({
-      url: `/task/${task_id}`,
+      url: `/todo/${store.state.todo.id}`,
     });
-    store.setState('task', null);
   }
 }
 

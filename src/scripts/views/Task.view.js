@@ -9,10 +9,9 @@ import { TODOS_FORM_TEMPLATE, TODOS_TABLE_TEMPLATE } from '../templates/';
 
 class TaskView {
   constructor(callbacks) {
-    this.callbacks = callbacks;
     this.root = document.getElementById(TODOS_SECTION_ID);
+    this.callbacks = callbacks;
     store.subscribe(this);
-    this.callbacks.getTask();
   }
 
   static getRequestBodyFromForm = (form) => {
@@ -37,37 +36,7 @@ class TaskView {
   init() {
     this.onSetElements();
     this.addEventListener();
-    // this.storeTask();
   }
-
-  // storeTask() {
-  //   const storeTask = store.getState();
-
-  //   const obj = {
-  //     title: storeTask.todo.title,
-  //     description: storeTask.todo.description,
-  //     status: storeTask.todo.status,
-  //     createdDate: storeTask.todo.createdDate,
-  //   };
-
-  //   const tBody = this.todosTableEl.querySelector('tbody');
-  //   const trEl = document.createElement('tr');
-
-  //   Object.entries(obj).forEach(([key, value]) => {
-  //     const tdEl = document.createElement('td');
-  //     tdEl.innerText = value;
-  //     trEl.appendChild(tdEl);
-  //   });
-
-  //   tBody.prepend(trEl);
-
-  //   // this.todosTableEl.innerHTML = generateTableTaskTemplate({
-  //   //   title: storeTask.todo.title,
-  //   //   description: storeTask.todo.description,
-  //   //   status: storeTask.todo.status,
-  //   //   createdDate: storeTask.todo.createdDate,
-  //   // });
-  // }
 
   onSetElements() {
     this.todosFormEl = document.getElementById(TODOS_FORM_ID);
@@ -84,6 +53,30 @@ class TaskView {
   handlerAddTask(e) {
     e.preventDefault();
     this.callbacks.addTask();
+
+    setTimeout(() => {
+      this.getTask();
+    }, 1000);
+  }
+
+  getTask() {
+    const storeTask = store.getState();
+    const obj = {
+      title: storeTask.todo.title,
+      description: storeTask.todo.description,
+      status: storeTask.todo.status,
+      createdDate: storeTask.todo.createdDate,
+    };
+    const tBody = this.todosTableEl.querySelector('tbody');
+    const trEl = document.createElement('tr');
+
+    Object.entries(obj).forEach(([key, value]) => {
+      const tdEl = document.createElement('td');
+      tdEl.innerText = value;
+      trEl.appendChild(tdEl);
+    });
+
+    tBody.prepend(trEl);
   }
 
   removeListeners() {

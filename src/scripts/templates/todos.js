@@ -95,6 +95,8 @@ export const TODOS_TABLE_TEMPLATE = `<div class="flex flex-col">
             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
               CreatedAt
             </th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+            </th>
           </tr>
         </thead>
         <tbody>

@@ -1,7 +1,7 @@
-@import "~normalize.css";
-@import "~tailwindcss/base";
-@import "~tailwindcss/components";
-@import "~tailwindcss/utilities";
+@import '~normalize.css';
+@import '~tailwindcss/base';
+@import '~tailwindcss/components';
+@import '~tailwindcss/utilities';
 
 * {
   box-sizing: border-box;
@@ -12,3 +12,17 @@ body {
   width: 100%;
 }
 
+#todos-table {
+  width: 60%;
+}
+
+.btn-delete {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
