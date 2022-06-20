@@ -6,9 +6,19 @@ import { Task } from '../entities';
 class TaskModule {
   constructor() {
     this.taskView = new TaskView({
+      getTasks: this.getTasks.bind(this),
       addTask: this.addTask.bind(this),
       deleteTask: this.deleteTask.bind(this),
     });
+  }
+
+  async getTasks() {
+    const tasks = await Http.get({
+      url: '/todo',
+    });
+    console.log(store);
+    // store.setState('gettodo', tasks);
+    return tasks;
   }
 
   async addTask() {
@@ -29,9 +39,9 @@ class TaskModule {
     );
   }
 
-  async deleteTask() {
+  async deleteTask(id) {
     await Http.delete({
-      url: `/todo/${store.state.todo.id}`,
+      url: `/todo/${id}`,
     });
   }
 }

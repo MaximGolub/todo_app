@@ -35,6 +35,7 @@ class TaskView {
 
   init() {
     this.onSetElements();
+    this.getTasks();
     this.addEventListener();
   }
 
@@ -50,39 +51,63 @@ class TaskView {
     this.btnAddTask.addEventListener('click', this.handlerAddTask.bind(this));
   }
 
+  addEventDeleteListener() {
+    this.btnDeleteTask = document.getElementsByClassName('btn-delete');
+    for (let i = 0; i < this.btnDeleteTask.length; i++) {
+      this.btnDeleteTask[i].addEventListener(
+        'click',
+        this.handlerDeleteTask.bind(this)
+      );
+    }
+  }
+
   handlerAddTask(e) {
     e.preventDefault();
     this.callbacks.addTask();
-
-    setTimeout(() => {
-      this.getTask();
-    }, 1000);
   }
 
-  getTask() {
-    const storeTask = store.getState();
-    const obj = {
-      title: storeTask.todo.title,
-      description: storeTask.todo.description,
-      status: storeTask.todo.status,
-      createdDate: storeTask.todo.createdDate,
-    };
-    const tBody = this.todosTableEl.querySelector('tbody');
-    const trEl = document.createElement('tr');
+  handlerDeleteTask(e) {
+    e.preventDefault();
+    this.callbacks.deleteTask('id');
+  }
 
-    Object.entries(obj).forEach(([key, value]) => {
-      const tdEl = document.createElement('td');
-      tdEl.innerText = value;
-      trEl.appendChild(tdEl);
-    });
+  async getTasks() {
+    const tasks = await this.callbacks.getTasks();
 
-    tBody.prepend(trEl);
+    for (const task of tasks) {
+      const tBody = this.todosTableEl.querySelector('tbody');
+      const trEl = document.createElement('tr');
+      const btnDelete = document.createElement('button');
+      btnDelete.className = 'btn-delete';
+      btnDelete.innerText = 'DELETE';
+
+      const obj = {
+        title: task.title,
+        description: task.description,
+        status: task.status,
+        createdDate: task.createdDate,
+      };
+
+      Object.entries(obj).forEach(([key, value]) => {
+        const tdEl = document.createElement('td');
+        tdEl.innerText = value;
+        trEl.appendChild(tdEl);
+      });
+
+      trEl.appendChild(btnDelete);
+      tBody.prepend(trEl);
+    }
+    this.addEventDeleteListener();
   }
 
   removeListeners() {
     this.btnAddTask.removeEventListener(
       'click',
       this.handlerAddTask.bind(this)
+    );
+    this.btnDeleteTask.removeEventListener(
+      'click',
+      this.handlerDeleteTask.bind(this)
     );
   }
 

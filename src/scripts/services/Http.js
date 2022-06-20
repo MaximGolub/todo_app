@@ -14,11 +14,21 @@ const fetcher = async ({ url, body = {}, headers = {}, method = 'GET' }) => {
 
   try {
     const path = BASE_URL + url;
-    const response = await fetch(path, {
-      body: JSON.stringify(body),
+    var requestOptions = {
+      method: method,
       headers: defaultHeaders,
-      method,
-    });
+    };
+
+    if (
+      body &&
+      Object.keys(body).length !== 0 &&
+      Object.getPrototypeOf(body) === Object.prototype
+    ) {
+      requestOptions.body = JSON.stringify(body);
+    }
+
+    const response = await fetch(path, requestOptions);
+
     return await response.json();
   } catch (error) {
     console.log(error);
