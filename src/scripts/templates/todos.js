@@ -50,9 +50,9 @@ export const TODOS_FORM_TEMPLATE = `<div class="block p-6 rounded-lg shadow-lg b
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example" id="task-selector" name="status">
-          <option selected>in_progress</option>
-          <option>completed</option>
-          <option>canceled</option>
+          <option value="in_progress">in_progress</option>
+          <option value="completed">completed</option>
+          <option value="canceled">canceled</option>
       </select>
   </div>
   <button type="submit" class="

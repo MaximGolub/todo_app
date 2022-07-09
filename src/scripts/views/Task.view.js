@@ -16,8 +16,10 @@ class TaskView {
 
   static getRequestBodyFromForm = (form) => {
     const reqBody = {};
+
     const inputSelectors = form.querySelectorAll('input');
-    const selectSelectors = form.querySelectorAll('#task-selector');
+    const selectSelectors = form.querySelector('#task-selector');
+    const nameAttr = selectSelectors.getAttribute('name');
 
     for (let index = 0; index < inputSelectors.length; index++) {
       const element = inputSelectors[index];
@@ -25,11 +27,8 @@ class TaskView {
       reqBody[nameAttr] = element.value;
     }
 
-    for (let index = 0; index < selectSelectors.length; index++) {
-      const element = selectSelectors[index];
-      const nameAttr = element.getAttribute('name');
-      reqBody[nameAttr] = element.value;
-    }
+    reqBody[nameAttr] = selectSelectors.value;
+
     return reqBody;
   };
 
@@ -64,21 +63,32 @@ class TaskView {
   handlerAddTask(e) {
     e.preventDefault();
     this.callbacks.addTask();
+
+    setTimeout(() => {
+      this.init();
+    }, 1000);
   }
 
   handlerDeleteTask(e) {
     e.preventDefault();
-    this.callbacks.deleteTask('id');
+    this.callbacks.deleteTask(e.target.value);
+
+    setTimeout(() => {
+      this.init();
+    }, 1000);
   }
 
   async getTasks() {
-    const tasks = await this.callbacks.getTasks();
+    await this.callbacks.getTasks();
 
-    for (const task of tasks) {
+    const { todo } = store.getState();
+
+    for (const task of todo) {
       const tBody = this.todosTableEl.querySelector('tbody');
       const trEl = document.createElement('tr');
       const btnDelete = document.createElement('button');
       btnDelete.className = 'btn-delete';
+      btnDelete.value = `${task.id}`;
       btnDelete.innerText = 'DELETE';
 
       const obj = {
@@ -111,10 +121,11 @@ class TaskView {
     );
   }
 
-  update({ user }) {
-    if (user) {
+  update({ user, todo }) {
+    if (user && !todo) {
       this.init();
-    } else {
+    }
+    if (!user && todo) {
       this.destroy();
     }
   }

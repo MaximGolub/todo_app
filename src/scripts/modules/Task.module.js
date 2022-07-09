@@ -16,17 +16,19 @@ class TaskModule {
     const tasks = await Http.get({
       url: '/todo',
     });
-    console.log(store);
-    // store.setState('gettodo', tasks);
-    return tasks;
+    store.setState('todo', tasks);
   }
 
   async addTask() {
     const reqBody = TaskView.getRequestBodyFromForm(this.taskView.todosFormEl);
+    // console.log(reqBody, 'reqBody');
+
     const task = await Http.post({
       url: '/todo',
       body: reqBody,
     });
+    // console.log(task, 'task');
+
     store.setState(
       'todo',
       new Task({
