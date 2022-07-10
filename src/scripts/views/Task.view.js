@@ -66,7 +66,7 @@ class TaskView {
 
     setTimeout(() => {
       this.init();
-    }, 1000);
+    }, 500);
   }
 
   handlerDeleteTask(e) {
@@ -75,7 +75,7 @@ class TaskView {
 
     setTimeout(() => {
       this.init();
-    }, 1000);
+    }, 500);
   }
 
   async getTasks() {
@@ -87,7 +87,8 @@ class TaskView {
       const tBody = this.todosTableEl.querySelector('tbody');
       const trEl = document.createElement('tr');
       const btnDelete = document.createElement('button');
-      btnDelete.className = 'btn-delete';
+      btnDelete.className =
+        'btn-delete m-1 w-full px-6 py-2.5 text-white font-medium text-xs bg-red-600 leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out';
       btnDelete.value = `${task.id}`;
       btnDelete.innerText = 'DELETE';
 
